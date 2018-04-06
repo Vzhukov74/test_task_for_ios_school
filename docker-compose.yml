@@ -21,4 +21,4 @@ services:
           - ./data/db:/data/db
         ports:
             - 27017:27017
-        command: mongod --smallfiles  # --quiet
+        command: mongod --smallfiles # --quiet

@@ -8,10 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 const db = require('./database/db');
 const DATABASE_URL = 'mongodb://mongodb:27017/test_task_for_ios_school_db';
-//test_task_for_ios_school_db
-app.get('/test', (req, res) => {
-  res.send('test')
-})
+
 app.get('/', tasksController.all);
 app.post('/', tasksController.add);
 app.put('/', tasksController.update);
