@@ -1,4 +1,4 @@
-FROM node:7
+FROM node:9
 WORKDIR /app
 COPY server.js /app
 RUN npm install

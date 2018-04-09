@@ -1,24 +1,34 @@
-version: '2'
+version: '3'
 services:
-    myapp:
-        build: .
-        container_name: "test_task_for_ios_school"
-        image: node/test_task_server
-        ports:
-            - 8080:8080
-        links:
-            - mongodb
-        depends_on:
-            - mongodb
-        command: node server.js
-    mongodb:
-        image: mongo:latest
-        container_name: "mongodb"
-        environment:
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
-        volumes:
-          - ./data/db:/data/db
-        ports:
-            - 27017:27017
-        command: mongod --smallfiles # --quiet
+    web:
+      image: node/test_task_server
+      build: .
+      command: node server.js
+      ports:
+          - "8080:8080"
+      depends_on:
+          - "mongo"
+      networks:
+          - network
+
+    mongo:
+      image: "mongo"
+      ports:
+          - "27017:27017"
+      networks:
+          - network
+      #environment:
+      #    - MONGO_DATA_DIR=/data/db
+      #    - MONGO_LOG_DIR=/dev/null
+      #volumes:
+      #    - ./data/db:/data/db
+      #command: mongod --smallfiles --port 27017 #27017 # --quiet
+
+    #adminmongo:
+    #  image: "mrvautin/adminmongo"
+    #  ports:
+    #      - "1234:1234"
+
+networks:
+  network:
+    driver: bridge

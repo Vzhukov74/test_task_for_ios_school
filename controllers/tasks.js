@@ -30,7 +30,6 @@ exports.add = (req, res) => {
         res.sendStatus(500);
     } else {
       res.send(task);
-      //res.sendStatus(200);
     }
   });
 };

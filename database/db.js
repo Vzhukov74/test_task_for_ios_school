@@ -1,5 +1,7 @@
 let mongoClient = require('mongodb').MongoClient;
 
+const DATABASE_NAME = 'test_task_for_ios_school_db';
+
 let state = {
   db: null
 }
@@ -9,11 +11,11 @@ exports.connect = (url, done) => {
     return done();
   }
 
-  mongoClient.connect(url, (error, database) => {
+  mongoClient.connect(url, {auto_reconnect:true}, (error, database) => {
     if (error) {
       return done(error);
     }
-    state.db = database.db('test_task_for_ios_school_db');
+    state.db = database.db(DATABASE_NAME);
     done();
   });
 };
